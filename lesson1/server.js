@@ -10,5 +10,8 @@ const server = http.createServer((req, res) =>{
     res.end(body) // Отдать браузеру, то что поместим с сервера
 })
 
-server.listen(3000) // Порт 
-console.log('server started')
+/* server.listen(3000) // Порт  */
+const port = process.env.PORT || 3000 // Глобальная перементая process. Окружение свойство порт
+server.listen(port)
+
+console.log('server started on port ' + port)
