@@ -11,7 +11,7 @@ const server = http.createServer((req, res) =>{
 })
 
 /* server.listen(3000) // Порт  */
-const port = process.env.PORT || 3000 // Глобальная перементая process. Окружение свойство порт
+const port = process.env.PORT || 3000 // Глобальная перементая process. Окружение свойство порт хероку сам дает порт
 server.listen(port)
 
 console.log('server started on port ' + port)
