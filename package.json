@@ -2,10 +2,10 @@
   "name": "lesson1_hw",
   "version": "1.0.0",
   "description": "",
-  "main": "lesson1_hw/server.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node lesson1_hw/server.js"
   },
   "keywords": [],
   "author": "",
