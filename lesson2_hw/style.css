@@ -1,0 +1,30 @@
+body {
+    width: 1280px;
+    margin: 0 auto;
+}
+
+.busket {
+    border: 1px solid grey;
+    box-sizing: border-box;
+    min-height: 50px;
+}
+
+.goods-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.good {
+    border: 1px solid black;
+    flex-direction: column;
+}
+
+.good-img {
+    display: block;
+    margin: 0 auto;
+}
+
+.good-btn {
+    display: block;
+    margin: 10px auto;
+}
