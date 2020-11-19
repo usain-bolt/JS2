@@ -12,6 +12,7 @@ body {
 .goods-list {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .good {
@@ -27,4 +28,15 @@ body {
 .good-btn {
     display: block;
     margin: 10px auto;
+}
+
+.btn-busket {
+    margin: 20px;
+    padding: 10px;
+}
+
+.btn-add {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
 }

@@ -1,12 +1,9 @@
 let itemsInBusket = []
 
+let sum = 0
+
 class GoodItem{
-/**
- * description класс товар
- * @param {*} title название товара
- * @param {*} price цена товара
- * render() - создание товара
- */
+
     name = ""
     price = 0
 
@@ -29,31 +26,24 @@ class GoodItem{
             btnBusket.addEventListener('click', () => {
                 this.createGoodInBusket()
             })
-            /* let goodDesc = document.createElement('span')
-            goodDesc = `Товар: ${this.name}, цена: ${this.price}` */
             block.textContent = `Товар: ${this.name}, \nцена: ${this.price}`
             placeToRender.appendChild(block)
             block.appendChild(img)
-            /* block.appendChild(goodDesc) */
             block.appendChild(btnBusket)
         }
     }
     createGoodInBusket(){
         const newGoodInBusket = new GoodInBusket(this.name, this.price)
         const currentItem = itemsInBusket.findIndex((item) => item.name === newGoodInBusket.name)
-        if(currentItem < 0){
-            itemsInBusket.push({newGoodInBusket, count: 1})
+        if(currentItem >= 0){
+            itemsInBusket[currentItem].count +=1
         }
-        else newGoodInBusket[currentItem].count += 1
+        else itemsInBusket.push({...newGoodInBusket, count: 1})
         console.log(itemsInBusket)
     }
 }
 
 class List{
-    /**
-     * description класс список товаров
-     * массив товаров
-     */
     items = []
 
     constructor(){
@@ -79,46 +69,78 @@ class List{
     }
 }
 
-const ListInstance = new List()
-/* const ListB = new ListBusket() */
-
+const listInstance = new List()
 
 class GoodInBusket{
-
-/*     count = 0 */
-
     constructor(name, price){
         this.name = name
         this.price = price
-/*         this.count = ++count
-        /* this.render() */
-    
-    }
-
-    render(){
-        const busket = document.querySelector('.busket')
-        /* const title = document.createElement('h3')
-        title.innerText = 'Содержание корзины' */
-        /* busket.appendChild(title) */
-        if(busket){
-            const busket = document.querySelector('.busket')
-            const wrpIteminBuskets = document.createElement('div')
-            wrpIteminBuskets.className = 'wrp-item-busket'
-            wrpIteminBuskets.innerText = `Название ${this.name}, цена ${this.price}`
-            busket.appendChild(wrpIteminBuskets)
-
-        }
-    }
-    renderContainer(){
-
     }
 }
 
 class ListBusket{
-    
     constructor(){
-        this.itemsInBusket.forEach(good =>{
-            good.render()
+        console.log(itemsInBusket)
+        itemsInBusket.forEach(good =>{
+            this.render(good.name, good.price, good.count)
+        })
+        this.sumElements()
+    }
+    sumElements(){
+        sum = 0
+        itemsInBusket.forEach(item => {
+            sum += item.price * item.count
+            console.log(sum)
+            const sumWrp = document.querySelector('h3')
+            sumWrp.innerText = `Общая сумма корзины ${sum}`
         })
     }
+    render(name, price, count){
+        const busket = document.querySelector('.wrp-item-busket')
+        if(busket){
+            busket.innerText = ''
+            itemsInBusket.forEach(item => {
+                busket.innerText += `Название: ${item.name}. Цена: ${item.price}. Кол-во: ${item.count} \n`
+            })
+        }
+    }
 }
+const wrp = document.querySelector('header')
+const btnBusketRender = document.createElement('button')
+btnBusketRender.innerText = 'Отобразить корзину'
+btnBusketRender.className = 'btn-busket'
+wrp.append(btnBusketRender)
+
+const deleteGoodsinBusket = document.createElement('button')
+deleteGoodsinBusket.innerText ='Очистить корзину'
+deleteGoodsinBusket.className = 'btn-busket'
+wrp.append(deleteGoodsinBusket)
+
+
+const goodList = document.querySelector('main')
+const btnAddGoods = document.createElement('button')
+btnAddGoods.innerText = 'Добавить товары к списку'
+btnAddGoods.className = 'btn-add'
+goodList.append(btnAddGoods)
+
+btnBusketRender.addEventListener('click', () =>{
+    const wrap = document.querySelector('.busket')
+    const sumWrp = document.createElement('h3')
+    wrap.appendChild(sumWrp)
+
+    const wrpIteminBuskets = document.createElement('div')
+    wrpIteminBuskets.className = 'wrp-item-busket'
+    wrap.appendChild(wrpIteminBuskets)
+
+    const listInBusket = new ListBusket()
+})
+
+deleteGoodsinBusket.addEventListener('click', () =>{
+    const busketDiv = document.querySelector('.busket')
+    itemsInBusket = []
+    busketDiv.innerHTML = ''
+})
+
+btnAddGoods.addEventListener('click', () =>{
+    const newList = new List()
+})
