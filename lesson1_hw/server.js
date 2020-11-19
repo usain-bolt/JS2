@@ -21,7 +21,7 @@ const server = http.createServer((req, res) => {
     catch(err){
         console.log(err)
     } */
-    const publicPath = './public'
+    const publicPath = './lesson1_hw/public'
     const body = null
     try{
         body = fs.readFileSync(`${publicPath}${req.url}`)
